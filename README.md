@@ -1,78 +1,88 @@
-📈 Netflix Stock Price Prediction Using Deep Learning
-This repository contains the code and report for a deep learning project that predicts Netflix (NFLX) stock closing prices using historical stock data. Implemented as part of the CS 583-B Deep Learning course, the project leverages recurrent neural networks to model temporal dependencies in financial time series.
+# 📈 Netflix Stock Price Prediction Using Deep Learning
 
-📌 Project Objective
-Predict the closing stock price of Netflix for January 2025 using historical stock data from 2019 to 2024. The model is designed for short-term forecasting—predicting the next trading day's closing price.
+This repository contains the code and report for a deep learning project predicting Netflix (NFLX) stock closing prices using historical data. Developed for the **CS 583-B Deep Learning** course, the project explores temporal modeling of financial time series through recurrent neural networks.
 
-🧠 Models Used
-We implemented and compared the following models:
+---
 
-GRU (Gated Recurrent Unit) ✅ Best Performer
+## 📌 Objective
 
-LSTM (Long Short-Term Memory)
+Predict **daily closing prices of Netflix stock for January 2025** using historical data from **2019 to 2024**. The model focuses on **short-term forecasting**—predicting the next trading day's close based on a rolling window of past values.
 
-Simple RNN
+---
 
-Dense Neural Network (DNN) – Used as a non-sequential baseline
+## 🧠 Models Implemented
 
-🧾 Dataset
-Source: Yahoo Finance / Other stock APIs
+| Model             | Description               | Performance |
+|------------------|---------------------------|-------------|
+| ✅ **GRU**        | Best performer overall     | ⭐ Best      |
+| LSTM             | Strong temporal modeling   | Good        |
+| Simple RNN       | Baseline RNN               | Moderate    |
+| Dense Neural Net | Non-sequential baseline    | Weakest     |
 
-Features:
+---
 
-Open
+## 🧾 Dataset
 
-High
+- **Source:** Yahoo Finance / Other stock APIs  
+- **Features:**
+  - `Open`
+  - `High`
+  - `Low`
+  - `Volume`
+  - `Close` *(Target Variable)*
 
-Low
+---
 
-Volume
+## 🏗️ Model Architecture
 
-Close (Target Variable)
+- **Input Window:** 50 time steps  
+- **Architecture:**
+  - Recurrent Layer (GRU / LSTM / SimpleRNN)
+  - Dropout Layer for regularization
+  - Dense Layer with 1 output neuron (predict next day's Close)
 
-🏗️ Model Architecture
-Input Window: 50 time steps
+---
 
-Recurrent Layers: LSTM / GRU / SimpleRNN
+## 📊 Evaluation Metrics (Best Model - GRU)
 
-Dropout Layer: For regularization
+- **RMSE:** 0.02075  
+- **MSE:** 0.00043  
+- **MAE:** *Very Low*  
+- **R² Score:** 0.9824
 
-Dense Output Layer: Single neuron for predicting the next day's close price
+---
 
-📊 Evaluation Metrics
-RMSE: 0.02075 (GRU)
+## 🔍 Key Assumptions
 
-MSE: 0.00043
+- No external features (e.g., macroeconomic indicators, news sentiment)
+- The time series is stationary or properly transformed
+- Selected features are sufficient for short-term prediction
 
-MAE: ~low
+---
 
-R²: 0.9824
+## 📈 Predicted Trends (January 2025)
 
-🔍 Key Assumptions
-No external features (macroeconomic or news sentiment)
+- **Start:** ~$870  
+- **Initial Drop:** Down to ~$725 (first week)  
+- **Stabilization:** ~$700–$725 (mid-month)  
+- **Recovery:** Upward trend toward ~$750 (month-end)
 
-Stock time series is stationary or transformed appropriately
+---
 
-Chosen features are sufficient for prediction
+## ✅ Key Results
 
-📈 Predicted Trends (January 2025)
-Start: ~$870
+- **GRU model** outperformed all other architectures in accuracy and generalization
+- Recurrent models captured temporal patterns far better than non-sequential DNN
 
-Initial Drop: Down to ~$725 in the first week
+---
 
-Stabilization: Hovering ~$700–$725 mid-month
+## 🔧 Future Improvements
 
-Recovery: Upward trend toward ~$750 by month-end
+- Integrate external data (e.g., market sentiment, earnings reports)
+- Explore attention-based architectures (e.g., Transformers)
+- Expand to multi-stock portfolio forecasting
 
-✅ Key Results
-GRU model outperformed all other architectures in both accuracy and generalization.
+---
 
-Recurrent models captured temporal patterns better than DNN.
-
-🔧 Future Improvements
-Integrate external data (e.g., market sentiment, earnings reports)
-
-Explore attention mechanisms
-
-Extend to multi-stock portfolios
+## 📂 Repository Structure
 
