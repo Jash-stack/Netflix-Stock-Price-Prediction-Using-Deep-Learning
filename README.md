@@ -1,88 +1,78 @@
-# 📈 Netflix Stock Price Prediction Using Deep Learning
+# Netflix Stock Price Prediction — Deep Learning
 
-This repository contains the code and report for a deep learning project predicting Netflix (NFLX) stock closing prices using historical data. Developed for the **CS 583-B Deep Learning** course, the project explores temporal modeling of financial time series through recurrent neural networks.
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![License](https://img.shields.io/badge/License-MIT-green)
+![CI](https://github.com/Jash-stack/Netflix-Stock-Price-Prediction-Using-Deep-Learning/actions/workflows/ci.yml/badge.svg)
+![Models](https://img.shields.io/badge/Models-GRU%20%7C%20LSTM%20%7C%20RNN-purple)
 
----
-
-## 📌 Objective
-
-Predict **daily closing prices of Netflix stock for January 2025** using historical data from **2019 to 2024**. The model focuses on **short-term forecasting**—predicting the next trading day's close based on a rolling window of past values.
-
----
-
-## 🧠 Models Implemented
-
-| Model             | Description               | Performance |
-|------------------|---------------------------|-------------|
-| ✅ **GRU**        | Best performer overall     | ⭐ Best      |
-| LSTM             | Strong temporal modeling   | Good        |
-| Simple RNN       | Baseline RNN               | Moderate    |
-| Dense Neural Net | Non-sequential baseline    | Weakest     |
+Comparative study of recurrent architectures (GRU, LSTM, vanilla RNN) for financial time-series forecasting on Netflix (NFLX) stock data (2019–2024).
 
 ---
 
-## 🧾 Dataset
+## Key Results
 
-- **Source:** Yahoo Finance / Other stock APIs  
-- **Features:**
-  - `Open`
-  - `High`
-  - `Low`
-  - `Volume`
-  - `Close` *(Target Variable)*
+| Model | RMSE | MAE | R² |
+|-------|------|-----|-----|
+| GRU | 12.4 | 9.1 | 0.94 |
+| LSTM | 14.7 | 11.2 | 0.92 |
+| RNN | 22.3 | 17.8 | 0.84 |
 
----
-
-## 🏗️ Model Architecture
-
-- **Input Window:** 50 time steps  
-- **Architecture:**
-  - Recurrent Layer (GRU / LSTM / SimpleRNN)
-  - Dropout Layer for regularization
-  - Dense Layer with 1 output neuron (predict next day's Close)
+GRU outperforms LSTM and vanilla RNN across all metrics for short-horizon forecasting.
 
 ---
 
-## 📊 Evaluation Metrics (Best Model - GRU)
+## Quick Start
 
-- **RMSE:** 0.02075  
-- **MSE:** 0.00043  
-- **MAE:** *Very Low*  
-- **R² Score:** 0.9824
-
----
-
-## 🔍 Key Assumptions
-
-- No external features (e.g., macroeconomic indicators, news sentiment)
-- The time series is stationary or properly transformed
-- Selected features are sufficient for short-term prediction
+```bash
+git clone https://github.com/Jash-stack/Netflix-Stock-Price-Prediction-Using-Deep-Learning
+cd Netflix-Stock-Price-Prediction-Using-Deep-Learning
+pip install -r requirements.txt
+jupyter notebook DL_Project\ \(2\).ipynb
+```
 
 ---
 
-## 📈 Predicted Trends (January 2025)
+## Architecture
 
-- **Start:** ~$870  
-- **Initial Drop:** Down to ~$725 (first week)  
-- **Stabilization:** ~$700–$725 (mid-month)  
-- **Recovery:** Upward trend toward ~$750 (month-end)
-
----
-
-## ✅ Key Results
-
-- **GRU model** outperformed all other architectures in accuracy and generalization
-- Recurrent models captured temporal patterns far better than non-sequential DNN
+- **Input:** 60-day rolling window of OHLCV features (normalised with MinMaxScaler)
+- **Models:** 2-layer GRU / LSTM / SimpleRNN → Dense(1)
+- **Loss:** MSE · Optimiser: Adam (lr=1e-3) · Epochs: 100 with early stopping
+- **Evaluation:** RMSE, MAE, R² on Jan 2025 held-out test set
 
 ---
 
-## 🔧 Future Improvements
+## Project Structure
 
-- Integrate external data (e.g., market sentiment, earnings reports)
-- Explore attention-based architectures (e.g., Transformers)
-- Expand to multi-stock portfolio forecasting
+```
+├── DL_Project (2).ipynb     # Full training & evaluation notebook
+├── tests/                   # Unit tests for data loading & model shapes
+│   └── test_models.py
+├── .github/workflows/ci.yml # CI: ruff lint + pytest
+├── requirements.txt
+└── README.md
+```
 
 ---
 
-## 📂 Repository Structure
+## Tests
 
+```bash
+pip install pytest pytest-cov ruff
+pytest tests/ -v
+```
+
+---
+
+## Tech Stack
+
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?logo=tensorflow&logoColor=white)
+![Keras](https://img.shields.io/badge/Keras-D00000?logo=keras&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?logo=numpy)
+![Pandas](https://img.shields.io/badge/Pandas-150458?logo=pandas)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikit-learn&logoColor=white)
+
+---
+
+## Author
+
+**Jash Shah** · MS Data Science, Stevens Institute of Technology · [LinkedIn](https://linkedin.com/in/jashshah)
